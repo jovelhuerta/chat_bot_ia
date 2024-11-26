@@ -1,28 +1,27 @@
-# set base image
-FROM python:3.9
+# Use a slim base image to reduce image size
+FROM python:3.9-slim
 
+# Set the working directory in the container
+WORKDIR /app
 
-USER root
-ENV TZ=America/Mexico_City
-ENV AUTOWRAPT_BOOTSTRAP=autodynatrace
-ENV AUTODYNATRACE_LOG_LEVEL=INFO
-#ENV TZ=Etc/GMT+6
-#ENV TZ=America/Mazatlan
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+COPY requirements.txt setup.py ./
 
-# set the working directory in the container
-WORKDIR /code
+# Install dependencies explicitly to verify correct installation
+RUN pip install --upgrade pip \
+    && pip install -r requirements.txt
 
-COPY requirements.txt .
-
-# install dependencies
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Se copia el contenido de la aplicacion
+# Copy the rest of the application code
 COPY . .
 
-EXPOSE 5100
 
-# command to run on container start
-#ENTRYPOINT ["python"]
-CMD [ "python", "-m", ".\src\main.py", "-p=8081", "-x=0.0.0.0"]
+# Set the environment variable for your virtual environment
+#ENV VIRTUAL_ENV=/app/.venv
+
+# Create the virtual environment
+#RUN python3 -m venv $VIRTUAL_ENV
+
+# Activate the virtual environment
+#ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+EXPOSE 5000
+# Define the command to run your application
+CMD ["python", "src/main.py"]
