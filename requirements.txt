@@ -5,3 +5,4 @@ langchain-core
 pymongo
 setuptools
 langchain_groq
+Flask

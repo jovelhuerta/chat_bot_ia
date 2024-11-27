@@ -13,15 +13,11 @@ RUN pip install --upgrade pip \
 # Copy the rest of the application code
 COPY . .
 
+# Expone el puerto que Google Cloud Run usará
+EXPOSE 8080
 
-# Set the environment variable for your virtual environment
-#ENV VIRTUAL_ENV=/app/.venv
+# Establece la variable de entorno para el puerto
+ENV PORT 8080
 
-# Create the virtual environment
-#RUN python3 -m venv $VIRTUAL_ENV
-
-# Activate the virtual environment
-#ENV PATH="$VIRTUAL_ENV/bin:$PATH"
-EXPOSE 5000
 # Define the command to run your application
 CMD ["python", "src/main.py"]
