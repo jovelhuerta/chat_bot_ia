@@ -3,6 +3,7 @@ TELEGRAM_TOKEN='7245264775:AAEmrUwkOvmif7GskujCodIkfCGYGP0GhqE'
 LLAMA_TOKEN='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'
 GYM_TELEGRAM_TOKEN='7795016297:AAHwQSYIY0-jiSDB3ix1GhJ3DrklbwBU4Pk'
 URI_BOT="https://chatimage-317825169565.us-central1.run.app/webhook"
+#URI_BOT="https://585d-130-41-95-77.ngrok-free.app/webhook"
 
 URI = "mongodb+srv://chat_gym:cxn5qU6VRl8EEGYN@efectodbgym.vl4xrqe.mongodb.net/?retryWrites=true&w=majority&appName=Chat_Gym"
 #URI= "mongodb://localhost:27017/"

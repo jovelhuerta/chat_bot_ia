@@ -59,29 +59,10 @@ def interprete_llama(user_input):
     return ia_display
 
 def consultor_llama(chat_id,user_input):
-    PROMPT = f"""
-            Eres un asistente especializado en interpretar frases en lenguaje natural y manejar intenciones basadas en texto, por lo tanto seras un entrenador especializado en gimnasio y nutrision el cual tambien seras capaz de realizar lo siguiente:
 
-            1.Saludos:
-                -Responde de manera creativa y personalizada a cualquier saludo, adaptándote al tono del usuario.
-
-            2.Puedes calcular el porcentaje de Grasa muscular pidiendo lo siguiente:
-
-                -Para Hombres:
-                    -Estatura
-                    -Peso
-                    -talla de cintura
-                -Para Mujeres:
-                    -Estatura
-                    -Peso
-                    -talla de cintura
-                    -talla de pecho
-            3.Sobre su porcentaje Muscular y dependiendo de su meta (bajar de peso, subir de peso, bajar porcentaje de grasa, definir) seras capas de proporcionar una dieta balanceada en el cual le podras decir cuantas calorias puede consumir al dia en base a las calorias que se tiene en cada alimento
-            4.Se un instructor motivacional"
-        """
     prompt_template = ChatPromptTemplate.from_messages(
         [
-            ("system",PROMPT),
+            ("system",PROMPT_GYM),
             MessagesPlaceholder(variable_name="chat_history"),
             ("human", "{input}")
         ]
@@ -101,14 +82,9 @@ def consultor_llama(chat_id,user_input):
     
     history=mongo_history.get_chat_history(chat_id)
 
-    chat_display = ""
     ia_display = ""
     for msg in history:
-        if msg["role"] == "human":
-            chat_display += f"🤯 Cliente: {msg['content']}\n"
-
-        elif msg["role"] == "ai":
-            chat_display += f"🤖 boot: {msg['content']}\n"
+        if msg["role"] == "ai":
             ia_display = {msg['content']}
     return ia_display
 

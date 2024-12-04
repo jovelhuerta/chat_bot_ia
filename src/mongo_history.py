@@ -4,11 +4,8 @@ from config import URI
 
 
 client = MongoClient(URI)
-client._timeout=30000,
-client.so
 db = client.Chat_Gym  # Base de datos llamada 'Chat_Gym'
 chat_collection = db.chat_history  # Colección de historial llamada 'chat_history'
-
 
 
 def save_message(user_id, role, content):
@@ -20,7 +17,7 @@ def save_message(user_id, role, content):
     }
     chat_collection.insert_one(message)  # Inserta el mensaje en la colección
 
-# Función para obtener el historial de un usuario específico
+
 def get_chat_history(user_id):
     messages = chat_collection.find({"user_id": user_id}).sort("timestamp", 1)  # Ordena por timestamp
     return list(messages)
